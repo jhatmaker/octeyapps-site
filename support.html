@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support & Feedback | Hatmaker Apps</title>
+  <meta name="description" content="Support Hatmaker Apps development or send us feedback. We'd love to hear from you."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --border: #e8e4dd;
+      --text: #1a1a1a;
+      --muted: #7a7570;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --accent2: #f59e0b;
+      --accent2-light: #fffbeb;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --purple: #7c3aed;
+      --purple-light: #f5f3ff;
+      --sans: 'Nunito', sans-serif;
+      --serif: 'Libre Baskerville', serif;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,247,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { font-size: 1.2rem; font-weight: 900; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* PAGE HEADER */
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .page-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.75rem;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 900; letter-spacing: -0.03em; line-height: 1.1;
+      margin-bottom: 0.85rem;
+    }
+
+    .page-header h1 em {
+      font-style: italic;
+      font-family: var(--serif);
+      color: var(--accent);
+    }
+
+    .page-header p {
+      font-size: 1rem; color: var(--muted); line-height: 1.7;
+      max-width: 500px; margin: 0 auto;
+    }
+
+    /* TWO COLUMN LAYOUT */
+    .two-col {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* CARD BASE */
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card-eyebrow {
+      font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.5rem; font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1.2;
+      margin-bottom: 0.65rem;
+    }
+
+    .card-desc {
+      font-size: 0.88rem; color: var(--muted);
+      line-height: 1.7; margin-bottom: 1.75rem;
+    }
+
+    /* ── SUPPORT CARD ── */
+    .support-card { border-top: 4px solid var(--purple); }
+    .support-card .card-eyebrow { color: var(--purple); }
+
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .amount-btn {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.15s;
+      font-family: var(--sans);
+    }
+
+    .amount-btn:hover {
+      border-color: var(--purple);
+      background: var(--purple-light);
+      transform: translateY(-2px);
+    }
+
+    .amount-btn.selected {
+      border-color: var(--purple);
+      background: var(--purple-light);
+    }
+
+    .amount-value {
+      display: block;
+      font-size: 1.3rem; font-weight: 900;
+      color: var(--purple); margin-bottom: 0.15rem;
+    }
+
+    .amount-label {
+      display: block;
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--muted); letter-spacing: 0.05em;
+    }
+
+    .custom-amount-wrap {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .custom-amount-wrap .prefix {
+      position: absolute; left: 1rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem; font-weight: 800; color: var(--muted);
+      pointer-events: none;
+    }
+
+    .custom-amount-input {
+      width: 100%;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 0.8rem 1rem 0.8rem 1.75rem;
+      font-family: var(--sans);
+      font-size: 1rem; font-weight: 700;
+      color: var(--text);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .custom-amount-input:focus { border-color: var(--purple); }
+    .custom-amount-input::placeholder { color: var(--muted); font-weight: 600; }
+
+    /* Favorite game picker — shared */
+    .fav-label {
+      font-size: 0.8rem; font-weight: 800;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .game-picker {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .game-chip {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 100px;
+      padding: 0.4rem 0.9rem;
+      font-family: var(--sans);
+      font-size: 0.8rem; font-weight: 800;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex; align-items: center; gap: 0.35rem;
+    }
+
+    .game-chip:hover { border-color: var(--accent); }
+
+    .support-card .game-chip.selected {
+      border-color: var(--purple);
+      background: var(--purple-light);
+      color: var(--purple);
+    }
+
+    .feedback-card .game-chip.selected {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .btn-support {
+      width: 100%;
+      background: var(--purple);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 1rem;
+      font-family: var(--sans);
+      font-size: 0.95rem; font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+
+    .btn-support:hover { background: #6d28d9; transform: translateY(-1px); }
+    .btn-support:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
+
+    .support-note {
+      font-size: 0.75rem; color: var(--muted); font-weight: 600;
+      text-align: center; margin-top: 0.85rem; line-height: 1.5;
+    }
+
+    .support-note a { color: var(--accent); text-decoration: none; font-weight: 700; }
+
+    /* ── FEEDBACK CARD ── */
+    .feedback-card { border-top: 4px solid var(--accent); }
+    .feedback-card .card-eyebrow { color: var(--accent); }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group.full { grid-column: span 2; }
+
+    .form-group label {
+      font-size: 0.78rem; font-weight: 800;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-family: var(--sans);
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--text);
+      transition: border-color 0.2s;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--accent); }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .optional-tag {
+      font-size: 0.68rem; font-weight: 700;
+      color: var(--muted); margin-left: 0.35rem;
+      text-transform: none; letter-spacing: 0;
+    }
+
+    .btn-feedback {
+      width: 100%;
+      background: var(--accent);
+      color: white; border: none;
+      border-radius: 10px; padding: 1rem;
+      font-family: var(--sans);
+      font-size: 0.95rem; font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .btn-feedback:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-feedback:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
+
+    /* Success / error states */
+    .form-status {
+      display: none;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      font-size: 0.88rem; font-weight: 700;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .form-status.success { background: var(--green-light); color: #166534; border: 1.5px solid #bbf7d0; display: block; }
+    .form-status.error   { background: #fef2f2; color: #991b1b; border: 1.5px solid #fecaca; display: block; }
+
+    /* Stripe redirect notice */
+    .stripe-redirect {
+      display: none;
+      background: var(--purple-light);
+      border: 1.5px solid #ddd6fe;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--purple);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    footer p { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+    footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); font-weight: 600; text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      .two-col { grid-template-columns: 1fr; padding: 1.5rem 1.25rem 4rem; }
+      .page-header { padding: 4rem 1.25rem 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .amount-grid { grid-template-columns: repeat(3, 1fr); }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Hatmaker<span>Apps</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#apps">Games</a></li>
+      <li><a href="index.html#story">About</a></li>
+      <li><a href="support.html" class="active">Support</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <span class="page-eyebrow">Community</span>
+    <h1>Love the games?<br><em>Show it.</em></h1>
+    <p>Send us feedback to help us improve, or chip in to keep new games coming. Either way, we appreciate you.</p>
+  </div>
+
+  <div class="two-col">
+
+    <!-- ── SUPPORT CARD ── -->
+    <div class="card support-card">
+      <span class="card-eyebrow">Support Development</span>
+      <h2>Buy us a coffee ☕</h2>
+      <p class="card-desc">All our games are free and will stay free. If you enjoy them, a small contribution helps us keep building. Every bit goes directly into new games and updates.</p>
+
+      <div class="amount-grid">
+        <button class="amount-btn" data-amount="1" onclick="selectAmount(this)">
+          <span class="amount-value">$1</span>
+          <span class="amount-label">Coffee</span>
+        </button>
+        <button class="amount-btn selected" data-amount="5" onclick="selectAmount(this)">
+          <span class="amount-value">$5</span>
+          <span class="amount-label">Lunch</span>
+        </button>
+        <button class="amount-btn" data-amount="10" onclick="selectAmount(this)">
+          <span class="amount-value">$10</span>
+          <span class="amount-label">Pizza</span>
+        </button>
+      </div>
+
+      <div class="custom-amount-wrap">
+        <span class="prefix">$</span>
+        <input
+          type="number"
+          class="custom-amount-input"
+          id="customAmount"
+          placeholder="Other amount"
+          min="1"
+          oninput="clearAmountSelection()"
+        />
+      </div>
+
+      <span class="fav-label">Your favorite game right now?</span>
+      <div class="game-picker" id="supportGamePicker">
+        <button class="game-chip" onclick="selectGame(this, 'support')">🔤 Hangman</button>
+        <button class="game-chip" onclick="selectGame(this, 'support')">⚓ Sink It!</button>
+        <button class="game-chip" onclick="selectGame(this, 'support')">🎯 Code Breaker</button>
+        <button class="game-chip" onclick="selectGame(this, 'support')">🤷 Love them all</button>
+      </div>
+
+      <button class="btn-support" id="supportBtn" onclick="handleSupport()">
+        ❤️ Support Hatmaker Apps
+      </button>
+      <div class="stripe-redirect" id="stripeNotice">
+        Redirecting to secure payment… 🔒
+      </div>
+      <p class="support-note">
+        Payments processed securely via Stripe.<br>
+        Hatmaker Apps never sees your card details.
+        <br><a href="privacy.html">Privacy Policy</a>
+      </p>
+    </div>
+
+    <!-- ── FEEDBACK CARD ── -->
+    <div class="card feedback-card">
+      <span class="card-eyebrow">Send Feedback</span>
+      <h2>Tell us what you think 💬</h2>
+      <p class="card-desc">Bug report, feature idea, or just a kind word — we read every message. Name and email are optional but helpful if you'd like a reply.</p>
+
+      <span class="fav-label">Your favorite game right now? <span class="optional-tag">(optional)</span></span>
+      <div class="game-picker" id="feedbackGamePicker">
+        <button class="game-chip" onclick="selectGame(this, 'feedback')">🔤 Hangman</button>
+        <button class="game-chip" onclick="selectGame(this, 'feedback')">⚓ Sink It!</button>
+        <button class="game-chip" onclick="selectGame(this, 'feedback')">🎯 Code Breaker</button>
+        <button class="game-chip" onclick="selectGame(this, 'feedback')">🤷 Love them all</button>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Name <span class="optional-tag">(optional)</span></label>
+          <input type="text" id="fbName" placeholder="Your name" autocomplete="name"/>
+        </div>
+        <div class="form-group">
+          <label>Email <span class="optional-tag">(optional)</span></label>
+          <input type="email" id="fbEmail" placeholder="you@example.com" autocomplete="email"/>
+        </div>
+        <div class="form-group full">
+          <label>Feedback type</label>
+          <select id="fbType">
+            <option value="">— Select one —</option>
+            <option value="bug">🐛 Bug report</option>
+            <option value="feature">💡 Feature idea</option>
+            <option value="general">💬 General feedback</option>
+            <option value="love">❤️ Just saying hi</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Message</label>
+          <textarea id="fbMessage" placeholder="Tell us what's on your mind…"></textarea>
+        </div>
+      </div>
+
+      <button class="btn-feedback" id="feedbackBtn" onclick="handleFeedback()">
+        ✉️ Send Feedback
+      </button>
+      <div class="form-status" id="feedbackStatus"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Hatmaker Apps · Published by <a href="https://jehelectronics.com">JEH Electronics</a></p>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#apps">Games</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="mailto:support@hatmakerapp.com">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // ── EmailJS ──────────────────────────────────────────────
+    // Replace these three values with your EmailJS credentials:
+	// TODO: upgrade to Personal ($9/mo) to add domain whitelist, OR
+	// migrate to AWS Lambda + SES
+    const EMAILJS_PUBLIC_KEY  = 'cK1nSDiSpg-3Td08i';
+    const EMAILJS_SERVICE_ID  = 'service_3814a2i';
+    const EMAILJS_TEMPLATE_ID = 'template_gwe5dux';
+
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    // ── Stripe ───────────────────────────────────────────────
+    // Replace with your actual Stripe Payment Links:
+    const STRIPE_LINKS = {
+      1:  'https://buy.stripe.com/8x2bJ35Ki4sH1IFbEhfbq00',
+      5:  'https://buy.stripe.com/aFa6oJ4GecZdfzvbEhfbq01',
+      10: 'https://buy.stripe.com/fZu8wRc8G3oDcnj7o1fbq02',
+    };
+    // For custom amounts, replace with a Stripe Payment Link
+    // that has "customer chooses price" enabled:
+    const STRIPE_CUSTOM_LINK = 'https://buy.stripe.com/aFadRb0pY5wLcnj0ZDfbq04';
+
+    // ── State ────────────────────────────────────────────────
+    let selectedAmount = 5;
+    let supportGame   = '';
+    let feedbackGame  = '';
+
+    // ── Amount selection ─────────────────────────────────────
+    function selectAmount(btn) {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedAmount = parseInt(btn.dataset.amount);
+      document.getElementById('customAmount').value = '';
+    }
+
+    function clearAmountSelection() {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+      selectedAmount = null;
+    }
+
+    // ── Game chip selection ──────────────────────────────────
+    function selectGame(chip, context) {
+      const picker = document.getElementById(
+        context === 'support' ? 'supportGamePicker' : 'feedbackGamePicker'
+      );
+      picker.querySelectorAll('.game-chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      if (context === 'support') supportGame = chip.textContent.trim();
+      else feedbackGame = chip.textContent.trim();
+    }
+
+    // ── Support / Stripe ─────────────────────────────────────
+    function handleSupport() {
+      const custom = parseFloat(document.getElementById('customAmount').value);
+      const amount = custom > 0 ? custom : selectedAmount;
+
+      if (!amount || amount < 1) {
+        alert('Please select or enter a support amount.');
+        return;
+      }
+
+      const notice = document.getElementById('stripeNotice');
+      const btn    = document.getElementById('supportBtn');
+      notice.style.display = 'block';
+      btn.disabled = true;
+
+      // Pick the right Stripe link
+      let url = STRIPE_LINKS[amount] || STRIPE_CUSTOM_LINK;
+
+      // Append favorite game as a URL param so Stripe metadata captures it
+      if (supportGame) {
+        url += (url.includes('?') ? '&' : '?') +
+          'client_reference_id=' + encodeURIComponent('fav:' + supportGame);
+      }
+
+      setTimeout(() => { window.location.href = url; }, 800);
+    }
+
+    // ── Feedback / EmailJS ───────────────────────────────────
+    async function handleFeedback() {
+      const message = document.getElementById('fbMessage').value.trim();
+      if (!message) {
+        alert('Please enter a message before sending.');
+        return;
+      }
+
+      const type    = document.getElementById('fbType').value;
+      if (!type) {
+        alert('Please select a feedback type.');
+        return;
+      }
+
+      const btn    = document.getElementById('feedbackBtn');
+      const status = document.getElementById('feedbackStatus');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      status.className = 'form-status';
+
+      const params = {
+        from_name:     document.getElementById('fbName').value.trim()  || 'Anonymous',
+        from_email:    document.getElementById('fbEmail').value.trim() || 'Not provided',
+        feedback_type: type,
+        favorite_game: feedbackGame || 'Not selected',
+        message:       message,
+      };
+
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+        status.className = 'form-status success';
+        status.textContent = '✅ Thanks for the feedback! We really appreciate it.';
+        // Reset form
+        ['fbName','fbEmail','fbMessage'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('fbType').value = '';
+        document.querySelectorAll('#feedbackGamePicker .game-chip').forEach(c => c.classList.remove('selected'));
+        feedbackGame = '';
+      } catch (err) {
+        status.className = 'form-status error';
+        status.textContent = '❌ Something went wrong. Please try emailing us directly at support@hatmakerapp.com';
+        console.error('EmailJS error:', err);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '✉️ Send Feedback';
+      }
+    }
+  </script>
+
+</body>
+</html>

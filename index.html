@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hatmaker Apps | Games for the Whole Family</title>
+  <meta name="description" content="Hatmaker Apps — fun, free Android games for the whole family. No ads, no accounts, no data collected. Just great games."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --border: #e8e4dd;
+      --text: #1a1a1a;
+      --muted: #7a7570;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --accent2: #f59e0b;
+      --accent2-light: #fffbeb;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --sans: 'Nunito', sans-serif;
+      --serif: 'Libre Baskerville', serif;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,247,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text {}
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-family: var(--serif);
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      max-width: 440px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.4rem 0.85rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      background: var(--surface);
+    }
+
+    .badge.green { background: var(--green-light); border-color: #bbf7d0; color: var(--green); }
+    .badge.blue { background: var(--accent-light); border-color: #bfdbfe; color: var(--accent); }
+    .badge.amber { background: var(--accent2-light); border-color: #fde68a; color: #92400e; }
+
+    /* Hero illustration area */
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .hero-game-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hero-game-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-game-card:nth-child(2) {
+      margin-top: 1.5rem;
+    }
+
+    .hero-game-card:nth-child(3) {
+      grid-column: span 2;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .game-emoji {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .hero-game-card:nth-child(3) .game-emoji {
+      margin-bottom: 0;
+      font-size: 1.75rem;
+    }
+
+    .game-card-name {
+      font-size: 0.95rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+
+    .game-card-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* SECTION COMMON */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* APPS */
+    .apps-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .app-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+
+    .app-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .icon-blue { background: var(--accent-light); }
+    .icon-amber { background: var(--accent2-light); }
+    .icon-green { background: var(--green-light); }
+
+    .app-card h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .app-card-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 1.75rem;
+    }
+
+    .app-features {
+      list-style: none;
+      margin-bottom: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .app-features li {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .app-features li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    /* BADGE SYSTEM */
+    .app-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .ab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    /* Cost — green */
+    .ab-cost     { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    /* Connectivity — blue */
+    .ab-connect  { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    /* Privacy — purple */
+    .ab-privacy  { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+    /* Account — slate */
+    .ab-account  { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    /* Audience — amber */
+    .ab-audience { background: #fef9c3; color: #a16207; border: 1px solid #fde68a; }
+    /* Gameplay — rose */
+    .ab-play     { background: #ffe4e6; color: #be123c; border: 1px solid #fecdd3; }
+
+    .btn-play {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--text);
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-play:hover { background: var(--accent); transform: scale(1.02); }
+
+    .btn-play.coming-soon {
+      background: var(--border);
+      color: var(--muted);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* STORY */
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .story-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .story-text h2 em {
+      font-style: italic;
+      font-family: var(--serif);
+      color: var(--accent);
+    }
+
+    .story-text p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .story-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .story-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .story-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .story-card h4 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+    }
+
+    .story-card p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* PRIVACY STRIP */
+    .privacy-strip {
+      background: var(--accent-light);
+      border-top: 1px solid #bfdbfe;
+      border-bottom: 1px solid #bfdbfe;
+    }
+
+    .privacy-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .privacy-text h3 {
+      font-size: 1.1rem;
+      font-weight: 900;
+      margin-bottom: 0.35rem;
+    }
+
+    .privacy-text p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover { background: var(--accent); color: white; }
+
+    /* CONTACT */
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.25rem 3rem; }
+      .hero-visual { display: none; }
+      .apps-grid { grid-template-columns: 1fr; }
+      .story-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .story-cards { grid-template-columns: 1fr 1fr; }
+      .section { padding: 4rem 1.25rem; }
+      nav { padding: 0 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Hatmaker<span>Apps</span></a>
+    <ul class="nav-links">
+      <li><a href="#apps">Games</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="support.html">Support ❤️</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">🎮 Android Games</div>
+      <h1>Games the whole family <em>loves</em> to play.</h1>
+      <p class="hero-desc">Simple, fun, and completely free — Hatmaker Apps builds classic games for families. No ads. No accounts. No data collected. Just play.</p>
+      <div class="hero-badges">
+        <span class="badge green">✓ Current games are free</span>
+        <span class="badge green">✓ No data collected</span>
+        <span class="badge blue">📱 Android</span>
+        <span class="badge amber">👨‍👧‍👦 Family friendly</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-game-card">
+        <span class="game-emoji">🔤</span>
+        <div class="game-card-name">Hangman</div>
+        <div class="game-card-sub">Word guessing</div>
+      </div>
+      <div class="hero-game-card">
+        <span class="game-emoji">⚓</span>
+        <div class="game-card-name">Sink It!</div>
+        <div class="game-card-sub">Naval strategy</div>
+      </div>
+      <div class="hero-game-card">
+        <span class="game-emoji">🎯</span>
+        <div class="game-card-name">Code Breaker</div>
+        <div class="game-card-sub">Logic & deduction</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPS -->
+  <div class="apps-section">
+    <div class="section" id="apps">
+      <div class="section-header">
+        <span class="section-eyebrow">Our Games</span>
+        <h2>Three great games,<br>zero nonsense.</h2>
+        <p class="section-sub">Every game is free, offline, and built with families in mind. No internet required, no in-app purchases, no surprises.</p>
+      </div>
+      <div class="apps-grid">
+
+        <div class="app-card">
+          <div class="app-card-icon icon-blue">🔤</div>
+          <h3>Hangman</h3>
+          <p class="app-card-desc">The classic word-guessing game everyone knows. Guess letters to reveal the hidden word before you run out of chances. Great for building vocabulary and spelling skills.</p>
+          <div class="app-badges">
+            <span class="ab ab-cost">💚 Free</span>
+            <span class="ab ab-connect">📶 Offline</span>
+            <span class="ab ab-privacy">🔒 No Data Collected</span>
+            <span class="ab ab-account">👤 No Account</span>
+            <span class="ab ab-audience">👨‍👧‍👦 Family Friendly</span>
+            <span class="ab ab-play">🎮 Single Player</span>
+          </div>
+          <a href="#" class="btn-play coming-soon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
+            Coming to Google Play
+          </a>
+        </div>
+
+        <div class="app-card">
+          <div class="app-card-icon icon-amber">⚓</div>
+          <h3>Sink It!</h3>
+          <p class="app-card-desc">A classic naval strategy game for 1 or 2 players. Place your fleet, call your shots, and sink the enemy ships before they sink yours. Easy to learn, hard to put down.</p>
+          <div class="app-badges">
+            <span class="ab ab-cost">💚 Free</span>
+            <span class="ab ab-connect">📶 Offline</span>
+            <span class="ab ab-privacy">🔒 No Data Collected</span>
+            <span class="ab ab-account">👤 No Account</span>
+            <span class="ab ab-audience">👨‍👧‍👦 Family Friendly</span>
+            <span class="ab ab-play">🎮 Single Player</span>
+            <span class="ab ab-play">👥 Pass & Play</span>
+            <span class="ab ab-play">🔵 Bluetooth</span>
+            <span class="ab ab-play">📡 Wi-Fi Direct</span>
+          </div>
+          <a href="#" class="btn-play coming-soon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
+            Coming to Google Play
+          </a>
+        </div>
+
+        <div class="app-card">
+          <div class="app-card-icon icon-green">🎯</div>
+          <h3>Code Breaker</h3>
+          <p class="app-card-desc">A deduction game that sharpens logical thinking. Try to crack the hidden color sequence using clues from each guess. Endlessly replayable with configurable difficulty.</p>
+          <div class="app-badges">
+            <span class="ab ab-cost">💚 Free</span>
+            <span class="ab ab-connect">📶 Offline</span>
+            <span class="ab ab-privacy">🔒 No Data Collected</span>
+            <span class="ab ab-account">👤 No Account</span>
+            <span class="ab ab-audience">👨‍👧‍👦 Family Friendly</span>
+            <span class="ab ab-play">🎮 Single Player</span>
+          </div>
+          <a href="#" class="btn-play coming-soon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
+            Coming to Google Play
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <div class="section" id="story">
+    <div class="story-inner">
+      <div class="story-text">
+        <span class="section-eyebrow">Our Story</span>
+        <h2>Built by a dad,<br>for <em>his kids.</em></h2>
+        <p>Hatmaker Apps started with a simple idea — take the classic games my kids love to play on the living room table and put them in their hands anywhere we go.</p>
+        <p>Every game we build is designed to be simple enough for young kids but engaging enough that the whole family wants to play. No distractions, no dark patterns, just good games.</p>
+        <p>We're based in Idaho and publish all our apps under JEH Electronics on Google Play.</p>
+      </div>
+      <div class="story-cards">
+        <div class="story-card">
+          <div class="story-card-icon">🚫</div>
+          <h4>Free Apps, No Ads</h4>
+          <p>Our current free games contain no advertisements. Future apps may vary — we'll always be upfront.</p>
+        </div>
+        <div class="story-card">
+          <div class="story-card-icon">🔒</div>
+          <h4>Privacy First</h4>
+          <p>Our free games collect no personal data. Any future app that does will clearly disclose it.</p>
+        </div>
+        <div class="story-card">
+          <div class="story-card-icon">📶</div>
+          <h4>Fully Offline</h4>
+          <p>Our current games work without an internet connection.</p>
+        </div>
+        <div class="story-card">
+          <div class="story-card-icon">👨‍👧‍👦</div>
+          <h4>Family First</h4>
+          <p>Designed for all ages, from young kids to grandparents.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT STRIP -->
+  <div style="background: #f5f3ff; border-top: 1px solid #ddd6fe; border-bottom: 1px solid #ddd6fe;">
+    <div style="max-width:1100px; margin:0 auto; padding:2.75rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
+      <div>
+        <h3 style="font-size:1.1rem; font-weight:900; margin-bottom:0.35rem;">❤️ Enjoying the games?</h3>
+        <p style="font-size:0.88rem; color:var(--muted); line-height:1.6; max-width:520px;">All our games are free — but if they've brought some fun to your family, a small contribution or a piece of feedback means the world to us.</p>
+      </div>
+      <a href="support.html" style="display:inline-flex; align-items:center; gap:0.5rem; background:#7c3aed; color:white; font-size:0.85rem; font-weight:800; padding:0.8rem 1.6rem; border-radius:10px; text-decoration:none; white-space:nowrap; transition:background 0.2s;" onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">Support & Feedback →</a>
+    </div>
+  </div>
+
+  <!-- PRIVACY STRIP -->
+  <div class="privacy-strip">
+    <div class="privacy-inner">
+      <div class="privacy-text">
+        <h3>🔒 We're transparent about privacy — always.</h3>
+        <p>Our current free games collect no personal data whatsoever. As our app catalog grows, each app will clearly disclose what it does and doesn't collect. Read our full privacy policy for details.</p>
+      </div>
+      <a href="privacy.html" class="btn-outline">Read Privacy Policy →</a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <div class="contact-inner">
+      <span class="section-eyebrow">Contact</span>
+      <h2>We'd love to hear from you.</h2>
+      <p>Have a question, a bug report, or just want to say hi? Reach out — we're a small team and we read every message.</p>
+      <div class="contact-links">
+        <a href="mailto:support@hatmakerapp.com" class="contact-chip">✉️ support@hatmakerapp.com</a>
+        <a href="https://jehelectronics.com" target="_blank" class="contact-chip">🏢 JEH Electronics</a>
+        <a href="privacy.html" class="contact-chip">🔒 Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Hatmaker Apps · Published by <a href="https://jehelectronics.com">JEH Electronics</a> · Idaho, USA</p>
+    <ul class="footer-links">
+      <li><a href="#apps">Games</a></li>
+      <li><a href="#story">About</a></li>
+      <li><a href="support.html">Support ❤️</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="mailto:support@hatmakerapp.com">Contact</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
