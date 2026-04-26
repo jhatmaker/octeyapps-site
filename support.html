@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Support & Feedback | Hatmaker Apps</title>
-  <meta name="description" content="Support Hatmaker Apps development or send us feedback. We'd love to hear from you."/>
+  <title>Support & Feedback | Octey Apps</title>
+  <meta name="description" content="Support Octey Apps development or send us feedback. We'd love to hear from you."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -51,8 +51,8 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    .nav-logo { font-size: 1.2rem; font-weight: 900; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-    .nav-logo span { color: var(--accent); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 44px; width: auto; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
@@ -381,7 +381,7 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-logo">Hatmaker<span>Apps</span></a>
+    <a href="index.html" class="nav-logo"><img src="public/OcteyApps.png" alt="Octey Apps"></a>
     <ul class="nav-links">
       <li><a href="index.html#apps">Games</a></li>
       <li><a href="index.html#story">About</a></li>
@@ -440,14 +440,14 @@
       </div>
 
       <button class="btn-support" id="supportBtn" onclick="handleSupport()">
-        ❤️ Support Hatmaker Apps
+        ❤️ Support Octey Apps
       </button>
       <div class="stripe-redirect" id="stripeNotice">
         Redirecting to secure payment… 🔒
       </div>
       <p class="support-note">
         Payments processed securely via Stripe.<br>
-        Hatmaker Apps never sees your card details.
+        Octey Apps never sees your card details.
         <br><a href="privacy.html">Privacy Policy</a>
       </p>
     </div>
@@ -500,12 +500,12 @@
   </div>
 
   <footer>
-    <p>© 2026 Hatmaker Apps · Published by <a href="https://jehelectronics.com">JEH Electronics</a></p>
+    <p>© 2026 Octey Apps · Published by <a href="https://jehelectronics.com">JEH Electronics</a></p>
     <ul class="footer-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="index.html#apps">Games</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="mailto:support@hatmakerapp.com">Contact</a></li>
+      <li><a href="mailto:support@octeyapps.com">Contact</a></li>
     </ul>
   </footer>
 
@@ -626,7 +626,7 @@
         feedbackGame = '';
       } catch (err) {
         status.className = 'form-status error';
-        status.textContent = '❌ Something went wrong. Please try emailing us directly at support@hatmakerapp.com';
+        status.textContent = '❌ Something went wrong. Please try emailing us directly at support@octeyapps.com';
         console.error('EmailJS error:', err);
       } finally {
         btn.disabled = false;
