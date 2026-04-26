@@ -56,12 +56,14 @@
     }
 
     .nav-logo {
-      display: flex;
-      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--text);
       text-decoration: none;
+      letter-spacing: -0.02em;
     }
 
-    .nav-logo img { height: 44px; width: auto; }
+    .nav-logo span { color: var(--accent); }
 
     .nav-links {
       display: flex;
@@ -157,6 +159,13 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
+    }
+
+    .hero-logo {
+      grid-column: span 2;
+      width: 200px;
+      display: block;
+      margin: 0 auto 0.5rem;
     }
 
     .hero-game-card {
@@ -585,7 +594,7 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-logo"><img src="public/OcteyApps.png" alt="Octey Apps"></a>
+    <a href="index.html" class="nav-logo">Octey<span>Apps</span></a>
     <ul class="nav-links">
       <li><a href="#apps">Games</a></li>
       <li><a href="#story">Our Story</a></li>
@@ -609,6 +618,7 @@
       </div>
     </div>
     <div class="hero-visual">
+      <img src="public/OcteyApps.png" alt="Octey Apps" class="hero-logo">
       <div class="hero-game-card">
         <span class="game-emoji">🔤</span>
         <div class="game-card-name">Hangman</div>

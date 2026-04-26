@@ -48,8 +48,8 @@
       height: 64px;
     }
 
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 44px; width: auto; }
+    .nav-logo { font-size: 1.2rem; font-weight: 900; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
@@ -112,7 +112,7 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-logo"><img src="public/OcteyApps.png" alt="Octey Apps"></a>
+    <a href="index.html" class="nav-logo">Octey<span>Apps</span></a>
     <ul class="nav-links">
       <li><a href="index.html#apps">Games</a></li>
       <li><a href="index.html#story">About</a></li>
