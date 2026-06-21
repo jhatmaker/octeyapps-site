@@ -188,14 +188,18 @@
     }
 
     .game-emoji {
-      font-size: 2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       margin-bottom: 0.75rem;
       display: block;
+      object-fit: cover;
     }
 
     .hero-game-card:nth-child(3) .game-emoji {
       margin-bottom: 0;
-      font-size: 1.75rem;
+      width: 32px;
+      height: 32px;
     }
 
     .game-card-name {
@@ -662,17 +666,17 @@
     </div>
     <div class="hero-visual">
       <div class="hero-game-card">
-        <span class="game-emoji">🔤</span>
+        <img class="game-emoji" src="public/icons/hangman.png" alt="Hangman app icon">
         <div class="game-card-name">Hangman</div>
         <div class="game-card-sub">Word guessing</div>
       </div>
       <div class="hero-game-card">
-        <span class="game-emoji">⚓</span>
+        <img class="game-emoji" src="public/icons/sinkit.png" alt="Sink It! app icon">
         <div class="game-card-name">Sink It!</div>
         <div class="game-card-sub">Naval strategy</div>
       </div>
       <div class="hero-game-card">
-        <span class="game-emoji">🎯</span>
+        <img class="game-emoji" src="public/icons/codebreaker.png" alt="Code Breaker app icon">
         <div class="game-card-name">Code Breaker</div>
         <div class="game-card-sub">Logic & deduction</div>
       </div>

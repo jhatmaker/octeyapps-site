@@ -226,6 +226,15 @@
 
     .game-chip:hover { border-color: var(--accent); }
 
+    .chip-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+
     .support-card .game-chip.selected {
       border-color: var(--purple);
       background: var(--purple-light);
@@ -433,9 +442,9 @@
 
       <span class="fav-label">Your favorite game right now?</span>
       <div class="game-picker" id="supportGamePicker">
-        <button class="game-chip" onclick="selectGame(this, 'support')">🔤 Hangman</button>
-        <button class="game-chip" onclick="selectGame(this, 'support')">⚓ Sink It!</button>
-        <button class="game-chip" onclick="selectGame(this, 'support')">🎯 Code Breaker</button>
+        <button class="game-chip" onclick="selectGame(this, 'support')"><img class="chip-icon" src="public/icons/hangman.png" alt="">Hangman</button>
+        <button class="game-chip" onclick="selectGame(this, 'support')"><img class="chip-icon" src="public/icons/sinkit.png" alt="">Sink It!</button>
+        <button class="game-chip" onclick="selectGame(this, 'support')"><img class="chip-icon" src="public/icons/codebreaker.png" alt="">Code Breaker</button>
         <button class="game-chip" onclick="selectGame(this, 'support')">🤷 Love them all</button>
       </div>
 
@@ -460,9 +469,9 @@
 
       <span class="fav-label">Your favorite game right now? <span class="optional-tag">(optional)</span></span>
       <div class="game-picker" id="feedbackGamePicker">
-        <button class="game-chip" onclick="selectGame(this, 'feedback')">🔤 Hangman</button>
-        <button class="game-chip" onclick="selectGame(this, 'feedback')">⚓ Sink It!</button>
-        <button class="game-chip" onclick="selectGame(this, 'feedback')">🎯 Code Breaker</button>
+        <button class="game-chip" onclick="selectGame(this, 'feedback')"><img class="chip-icon" src="public/icons/hangman.png" alt="">Hangman</button>
+        <button class="game-chip" onclick="selectGame(this, 'feedback')"><img class="chip-icon" src="public/icons/sinkit.png" alt="">Sink It!</button>
+        <button class="game-chip" onclick="selectGame(this, 'feedback')"><img class="chip-icon" src="public/icons/codebreaker.png" alt="">Code Breaker</button>
         <button class="game-chip" onclick="selectGame(this, 'feedback')">🤷 Love them all</button>
       </div>
 
