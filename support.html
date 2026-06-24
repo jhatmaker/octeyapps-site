@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     :root {
       --bg: #f8f7f4;
@@ -448,6 +449,12 @@
         <button class="game-chip" onclick="selectGame(this, 'support')">🤷 Love them all</button>
       </div>
 
+      <div class="g-recaptcha"
+           data-sitekey="6LdBuzItAAAAAIKQ664yD6ONO2ooDnmez26qfuCa"
+           data-callback="onRecaptchaSuccess"
+           data-expired-callback="onRecaptchaExpired"
+           data-size="invisible">
+      </div>
       <button class="btn-support" id="supportBtn" onclick="handleSupport()">
         ❤️ Support Octey Apps
       </button>
@@ -579,21 +586,30 @@
         return;
       }
 
-      const notice = document.getElementById('stripeNotice');
-      const btn    = document.getElementById('supportBtn');
-      notice.style.display = 'block';
-      btn.disabled = true;
+      document.getElementById('stripeNotice').style.display = 'block';
+      document.getElementById('supportBtn').disabled = true;
 
-      // Pick the right Stripe link
+      grecaptcha.execute();
+    }
+
+    function onRecaptchaSuccess(token) {
+      const custom = parseFloat(document.getElementById('customAmount').value);
+      const amount = custom > 0 ? custom : selectedAmount;
+
       let url = STRIPE_LINKS[amount] || STRIPE_CUSTOM_LINK;
 
-      // Append favorite game as a URL param so Stripe metadata captures it
       if (supportGame) {
         url += (url.includes('?') ? '&' : '?') +
           'client_reference_id=' + encodeURIComponent('fav:' + supportGame);
       }
 
       setTimeout(() => { window.location.href = url; }, 800);
+    }
+
+    function onRecaptchaExpired() {
+      document.getElementById('stripeNotice').style.display = 'none';
+      document.getElementById('supportBtn').disabled = false;
+      grecaptcha.reset();
     }
 
     // ── Feedback / EmailJS ───────────────────────────────────
