@@ -175,16 +175,9 @@
       box-shadow: var(--shadow-lg);
     }
 
-    .hero-game-card:nth-child(2) {
+    .hero-game-card:nth-child(2),
+    .hero-game-card:nth-child(4) {
       margin-top: 1.5rem;
-    }
-
-    .hero-game-card:nth-child(3) {
-      grid-column: span 2;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.25rem 1.5rem;
     }
 
     .game-emoji {
@@ -194,12 +187,6 @@
       margin-bottom: 0.75rem;
       display: block;
       object-fit: cover;
-    }
-
-    .hero-game-card:nth-child(3) .game-emoji {
-      margin-bottom: 0;
-      width: 32px;
-      height: 32px;
     }
 
     .game-card-name {
@@ -257,7 +244,7 @@
 
     .apps-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
 
@@ -300,6 +287,7 @@
     .icon-blue { background: var(--accent-light); }
     .icon-amber { background: var(--accent2-light); }
     .icon-green { background: var(--green-light); }
+    .icon-purple { background: #f3e8ff; }
 
     .app-card h3 {
       font-size: 1.25rem;
@@ -680,6 +668,11 @@
         <div class="game-card-name">Code Breaker</div>
         <div class="game-card-sub">Logic & deduction</div>
       </div>
+      <div class="hero-game-card">
+        <img class="game-emoji" src="public/icons/slideblocks.png" alt="Slide Blocks app icon">
+        <div class="game-card-name">Slide Blocks</div>
+        <div class="game-card-sub">Sliding puzzle</div>
+      </div>
     </div>
   </div>
 
@@ -688,7 +681,7 @@
     <div class="section" id="apps">
       <div class="section-header">
         <span class="section-eyebrow">Our Games</span>
-        <h2>Three great games,<br>zero nonsense.</h2>
+        <h2>Four great games,<br>zero nonsense.</h2>
         <p class="section-sub">Every game is free, offline, and built with families in mind. No internet required, no in-app purchases, no surprises.</p>
       </div>
       <div class="apps-grid">
@@ -748,6 +741,24 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
             Get it on Google Play
           </a>
+        </div>
+
+        <div class="app-card">
+          <div class="app-card-icon icon-purple"><img src="public/icons/slideblocks.png" alt="Slide Blocks app icon" width="56" height="56" loading="lazy"></div>
+          <h3>Slide Blocks</h3>
+          <p class="app-card-desc">A calm, clean sliding-block puzzle. Slide the pieces out of the way to open a path and free the red block. No timers, no pressure — just a satisfying little logic problem, with endless fresh puzzles whenever you want more.</p>
+          <div class="app-badges">
+            <span class="ab ab-cost">💚 Free</span>
+            <span class="ab ab-connect">📶 Offline</span>
+            <span class="ab ab-privacy">🔒 No Data Collected</span>
+            <span class="ab ab-account">👤 No Account</span>
+            <span class="ab ab-audience">👨‍👧‍👦 Family Friendly</span>
+            <span class="ab ab-play">🎮 Single Player</span>
+          </div>
+          <span class="btn-play coming-soon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
+            Coming Soon to Google Play
+          </span>
         </div>
 
       </div>
