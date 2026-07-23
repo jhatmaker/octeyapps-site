@@ -92,6 +92,11 @@
     .policy-section ul { list-style: none; padding: 0; margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
     .policy-section ul li { font-size: 0.88rem; color: var(--muted); font-weight: 600; display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.6; }
     .policy-section ul li::before { content: '—'; color: var(--accent); flex-shrink: 0; margin-top: 0.05rem; }
+    .policy-section ul.perm-list { gap: 1rem; }
+    .policy-section ul.perm-list li { flex-direction: column; gap: 0.3rem; }
+    .policy-section ul.perm-list li::before { display: none; }
+    .policy-section ul.perm-list li .perm-name { display: block; color: var(--text); font-weight: 800; font-size: 0.92rem; padding-left: 0.75rem; border-left: 3px solid var(--accent); }
+    .policy-section ul.perm-list li .perm-desc { display: block; }
     .policy-section a { color: var(--accent); text-decoration: none; font-weight: 700; }
     .policy-section a:hover { text-decoration: underline; }
 
@@ -218,10 +223,19 @@
     <div class="policy-section">
       <h2><span class="num">03</span> Device Permissions</h2>
       <p>A couple of our games ask for a device permission so they can offer an optional feature. These permissions are used <strong>only</strong> for the feature described, and never to collect, store, or transmit personal data. Each game works fine even if you decline.</p>
-      <ul>
-        <li><strong>Slide Blocks — Camera:</strong> requested only if you choose to scan a shared puzzle's QR code. Scanning is handled entirely on your device by Google Play Services; no photos or video are taken, saved, or sent anywhere. You can play the whole game — and still share or import puzzles using a short text code — without ever granting camera access.</li>
-        <li><strong>N Arrow Escape — no camera permission at all:</strong> this game can scan a QR code to import a shared level, but it never asks for camera access. The scan is performed by Google Play Services in its own window, so the game itself never receives camera images. Nothing is photographed, saved, or sent anywhere, and you can share and import levels with a short text code instead.</li>
-        <li><strong>Sink It! — Bluetooth &amp; Wi-Fi Direct:</strong> requested only to connect two nearby devices for local head-to-head multiplayer. They are used solely to pass game information — such as ship placements and shots — directly between the two players' devices. No personal data is exchanged, and nothing passes through us or any server, because there are no servers. On some older Android versions, the system itself requires a location permission before an app may scan for nearby Wi-Fi Direct or Bluetooth devices; Sink It! requests it only for that purpose — to find the other player's device — and never uses it to determine, record, or share your actual location.</li>
+      <ul class="perm-list">
+        <li>
+          <span class="perm-name">Slide Blocks — Camera</span>
+          <span class="perm-desc">Requested only if you choose to scan a shared puzzle's QR code. Scanning is handled entirely on your device by Google Play Services; no photos or video are taken, saved, or sent anywhere. You can play the whole game — and still share or import puzzles using a short text code — without ever granting camera access.</span>
+        </li>
+        <li>
+          <span class="perm-name">N Arrow Escape — No camera permission at all</span>
+          <span class="perm-desc">This game can scan a QR code to import a shared level, but it never asks for camera access. The scan is performed by Google Play Services in its own window, so the game itself never receives camera images. Nothing is photographed, saved, or sent anywhere, and you can share and import levels with a short text code instead.</span>
+        </li>
+        <li>
+          <span class="perm-name">Sink It! — Bluetooth &amp; Wi-Fi Direct</span>
+          <span class="perm-desc">Requested only to connect two nearby devices for local head-to-head multiplayer. They are used solely to pass game information — such as ship placements and shots — directly between the two players' devices. No personal data is exchanged, and nothing passes through us or any server, because there are no servers. On some older Android versions, the system itself requires a location permission before an app may scan for nearby Wi-Fi Direct or Bluetooth devices; Sink It! requests it only for that purpose — to find the other player's device — and never uses it to determine, record, or share your actual location.</span>
+        </li>
       </ul>
       <p>The QR-scanning component used by Slide Blocks and N Arrow Escape (Google's on-device scanner) also declares standard network permissions for its own use. The games themselves make no network connections of their own, other than opening our website in your browser if you tap a link.</p>
     </div>
